@@ -6,13 +6,13 @@ import './sidebar.css'
 
 export default function Sidebar() {
 
-  const { setFiltered } = useContext(UserContext)
+  // const { setFiltered } = useContext(UserContext)
 
-  // const { setPublicState } = useContext(UserContext)
+  const { setPublicState } = useContext(UserContext)
 
   function handleFilter(e){
     axios.get(`/posts/search/categories?categories=${e.target.value}`)
-    .then(res => setFiltered(res.data))
+    .then(res => setPublicState(res.data))
     .catch(err => console.log(err))
   }
   return (

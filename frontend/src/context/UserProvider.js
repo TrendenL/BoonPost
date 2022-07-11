@@ -20,7 +20,6 @@ export default function UserProvider(props) {
     const [ userState, setUserState ] = useState(initState)
     const [ publicState, setPublicState ] = useState({posts: []})
     const [ comments, setComments ] = useState([])
-    const [ filtered, setFiltered ] = useState([])
 
     // signup
     function signup(credentials){
@@ -137,8 +136,7 @@ return (
                 addComment,
                 getComments,
                 comments,
-                filtered,
-                setFiltered
+                setPublicState
             }}>
             {props.children}
         </UserContext.Provider>
