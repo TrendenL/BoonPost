@@ -1,0 +1,21 @@
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-right: 55px;
+    margin-bottom: 30px;
+}
+
+.page-item button {
+    background: none;
+    border: none;
+    margin: 0px 5px;
+    font-family: 'Permanent Marker', cursive;;
+    font-size: 1.25rem;
+    transition: transform 500ms ease;
+}
+
+.page-item button:hover {
+    cursor: pointer;
+    color: #52345E;
+    transform: scale(5rem);
+}

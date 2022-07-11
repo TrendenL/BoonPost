@@ -1,0 +1,79 @@
+.write-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.writeImg {
+    margin: 0 auto;
+    margin-top: 20px;
+    width: 80%;
+    height: 250px;
+    border-radius: 5px;
+    object-fit: cover;
+}
+
+.writeForm {
+    margin-bottom: 30px;
+}
+
+
+.writeFormGroup {
+    margin: 0 auto;
+    margin-top: 20px;
+    width: 80%;
+    display: flex;
+    align-items: center;
+    background-color: #161D2F;
+}
+
+.writeIcon {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: 1px solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: #666;
+    cursor: pointer;
+}
+
+.writeInput {
+    font-size: 2.25rem;
+    border: none;
+    padding: 20px;
+    width: 70vw;
+    background-color: #161D2F;;
+}
+
+.writeInput:focus {
+    outline: none;
+}
+
+.writeText {
+    font-size: 1.8rem;
+    height: 50vh;
+    margin-bottom: 20px;
+}
+
+.chooseCategory {
+    background-color: #161D2F;
+}
+
+.chooseCategory select {
+    background-color: #161D2F;
+}
+
+.writeSubmit {
+    top: 20px;
+    right: 50px;
+    color: #fff;
+    background-color: teal;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.25rem;
+    cursor: pointer;
+}
