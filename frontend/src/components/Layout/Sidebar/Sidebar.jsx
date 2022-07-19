@@ -1,20 +1,12 @@
 import { useContext } from 'react'
 import { UserContext } from '../../../context/UserProvider'
-import axios from 'axios'
 
 import './sidebar.css'
 
 export default function Sidebar() {
 
-  // const { setFiltered } = useContext(UserContext)
+  const { handleFilter } = useContext(UserContext)
 
-  const { setPublicState } = useContext(UserContext)
-
-  function handleFilter(e){
-    axios.get(`/posts/search/categories?categories=${e.target.value}`)
-    .then(res => setPublicState(res.data))
-    .catch(err => console.log(err))
-  }
   return (
     <div className='sidebar'>
         <div className='categories'>
@@ -26,6 +18,7 @@ export default function Sidebar() {
                   <button className='list-items' value='Sports'>Sports</button>
                   <button className='list-items' value='Cinema'>Cinema</button>
                   <button className='list-items' value='Tech'>Tech</button>
+                  <button className='list-items' value='reset'>All</button>
               </ul>
         </div>
     </div>

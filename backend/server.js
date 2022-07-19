@@ -10,17 +10,16 @@ app.use(express.json())
 app.use(morgan('dev'))
 
 // connect to DB
-mongoose.connect('mongodb://localhost:27017/bloggerdb',
+mongoose.connect('mongodb://0.0.0.0:27017/bloggerdb',
     console.log('Connected to the DB')
 )
 
 // routes
 app.use('/auth', require('./routes/authRouter'))
 app.use('/api', jwt({secret: process.env.SECRET, algorithms: ['HS256']}))
-app.use('/posts', require('./routes/postsRouter'))
+app.use('/api/posts', require('./routes/postsRouter'))
 app.use('/posts', require('./routes/postsRouter'))
 app.use('/api/comments', require('./routes/commentRouter'))
-// app.use('/comments', require('./routes/commentRouter'))
 
 // error handling
 app.use((err, req, res, next) => {

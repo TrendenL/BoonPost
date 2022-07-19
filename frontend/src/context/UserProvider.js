@@ -120,6 +120,20 @@ export default function UserProvider(props) {
         .catch(err => console.log(err))
     }
 
+    // filter by category
+    function handleFilter(e){
+        if(e.target.value === 'reset'){
+            getAllPosts()
+        } else {
+            axios.get(`/posts/search/categories?categories=${e.target.value}`)
+            .then(res => setPublicState(prevPublicState => ({
+                ...prevPublicState,
+                posts: res.data
+            })))
+            .catch(err => console.log(err))
+        }
+    }
+
     useEffect(() => {
         getAllPosts()
     }, [])
@@ -136,7 +150,7 @@ return (
                 addComment,
                 getComments,
                 comments,
-                setPublicState
+                handleFilter
             }}>
             {props.children}
         </UserContext.Provider>
