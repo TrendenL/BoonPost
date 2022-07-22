@@ -1,9 +1,12 @@
 import { Link } from 'react-router-dom'
+import moment from 'moment'
 
 import './posts.css'
 
 export default function Post(props) {
-    const { title, content, categories, image, _id } = props
+    const { title, content, categories, image, createdAt, _id } = props
+
+    const timeAgo = moment(createdAt).fromNow()
 return (
     <div className='post'>
         <img src={image} alt='' />
@@ -14,7 +17,7 @@ return (
                 <span className='post-title'>{title}</span>
             
             <hr/>
-            <span className='post-date'>1 hour ago</span>
+            <span className='post-date'>{timeAgo}</span>
         </div>
         <p className='post-desc'>
             {content}

@@ -14,7 +14,9 @@ userAxios.interceptors.request.use(config => {
 export default function UserProvider(props) {
     const initState = { 
         user: JSON.parse(localStorage.getItem('user')) || {}, 
-        token: localStorage.getItem('token') || '', 
+        token: localStorage.getItem('token') || '',
+        posts: [],
+        error: ''
     }
     
     const [ userState, setUserState ] = useState(initState)
@@ -58,13 +60,14 @@ export default function UserProvider(props) {
         localStorage.removeItem('user')
         setUserState({
             user: {},
-            token: ""
+            token: "",
+            posts: []
         })
     }
 
     // get all posts
     function getAllPosts(){
-        axios.get('/posts')
+        userAxios.get('/api/posts')
         .then(res => {
             setPublicState(prevPublicState => ({
                 ...prevPublicState,
@@ -75,6 +78,16 @@ export default function UserProvider(props) {
     }
 
     // get user posts
+    function getUserPosts(){
+        userAxios.get('/api/posts/user')
+        .then(res => {
+            setUserState( prevUserState => ({
+                ...prevUserState,
+                posts: res.data
+            }))
+        })
+        .catch(err => console.log(err.response.data.errMsg))
+    }
 
     // add post
     function addPost(newPost){
@@ -89,20 +102,28 @@ export default function UserProvider(props) {
     }
 
     // update post
-    // function updatePost(postId){
-    //     axios.put(`/api/posts/${postId}`)
-    //         .then()
-    //         .catch(err => console.log(err.response.data))
-    // }
+    function updatePost(updates, postId){
+        userAxios.put(`/api/posts/${postId}`, updates)
+        .then(res => setUserState(prevUserState => ({
+            ...prevUserState,
+            posts: prevUserState.posts.map(post => post._id !== postId ? post : res.data)
+            })))
+        .catch(err => console.log(err.response.data))
+        getAllPosts()
+    }
 
 
 
     // delete post
-    // function deletePost(postId){
-    //     axios.delete(`/api/posts/${postId}`)
-    //     .then(res => console.log(res))
-    //     .catch(err => console.log(err))
-    // }
+    function deletePost(postId){
+        userAxios.delete(`/api/posts/${postId}`)
+        .then(res => setUserState(prevUserState => ({
+            ...prevUserState,
+            posts: prevUserState.posts.filter(post => post._id !== postId)
+        })))
+        .catch(err => console.log(err))
+        getAllPosts()
+    }
 
     // get comments
     function getComments(postId){
@@ -116,7 +137,11 @@ export default function UserProvider(props) {
     // add comment
     function addComment(newComment, postId){
         userAxios.post(`/api/comments/${postId}`, newComment)
-        .then()
+        .then(res => {
+            setComments(prevComments => (
+                [...prevComments, res.data]
+            ))
+        })
         .catch(err => console.log(err))
     }
 
@@ -138,10 +163,14 @@ export default function UserProvider(props) {
         getAllPosts()
     }, [])
 
+    
+
 return (
         <UserContext.Provider 
             value={{
+                userState,
                 ...userState,
+                getUserPosts,
                 ...publicState,
                 signup,
                 login,
@@ -150,7 +179,9 @@ return (
                 addComment,
                 getComments,
                 comments,
-                handleFilter
+                handleFilter,
+                deletePost,
+                updatePost
             }}>
             {props.children}
         </UserContext.Provider>

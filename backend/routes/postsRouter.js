@@ -15,7 +15,7 @@ postsRouter.get('/', (req, res, next) => {
 
 // get user posts
 postsRouter.get('/user', (req, res, next) => {
-    Post.find().populate('user').exec({user: req.auth._id}, (err, posts) => {
+    Post.find({user: req.auth._id}).populate('user').exec( (err, posts) => {
         if(err){
             res.status(500)
             return next(err)

@@ -1,0 +1,55 @@
+.profile-container {
+    width: 100%;
+    margin-top: 100px;
+}
+
+.profile {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    gap: 20px;
+    text-align: center;
+}
+
+.profile .profile-img {
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+}
+
+.profile-header {
+    display: flex;
+}
+
+.profile-header h1 {
+    font-size: 6rem;
+    font-family: 'Permanent Marker', cursive;
+}
+
+.profile h2 {
+    font-family: 'Permanent Marker', cursive;
+    font-size: 3rem;
+    border-bottom: 1px solid #fff;
+    margin-bottom: 100px;
+}
+
+.profile-header p {
+    font-family: 'Permanent Marker', cursive;
+    font-size: 1.2rem;
+    margin-top: 90px;
+    margin-left: 20px;
+}
+
+.member {
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+    margin-left: 30px;
+}
+
+.member p {
+    margin: 0;
+    text-align: left;
+}

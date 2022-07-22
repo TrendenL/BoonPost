@@ -1,18 +1,20 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 
-import './write.css'
+import './EditForm.css'
 
-export default function Write(props) {
+export default function EditForm(props) {
+
+    const { setEditToggle } = props
+    console.log(props)
+
     const initInputs = {
-        image: props.image || '',
-        title: props.title || '',
-        content: props.content || '',
-        categories: props.categories || ''
+        image: props.img ,
+        title: props.title ,
+        content: props.content,
+        categories: props.categories
     }
 
     const [ inputs, setInputs ] = useState(initInputs)
-
-    const { addPost } = props
 
     const { title, content, image, categories } = inputs
 
@@ -28,24 +30,25 @@ export default function Write(props) {
 
     function handleSubmit(e){
         e.preventDefault()
-        addPost(inputs)
+        props.updatePost(inputs, props.id)
         setInputs(initInputs)
     }
 
-    return (
-    <div className='write-container'>
-            
-            <form className='writeForm' onSubmit={handleSubmit}>
-                    <input type='text' name='image' value={image} placeholder='Image' onChange={handleChange} className='writeImage'/>
-                <div className='writeFormGroup'>
-                    <input type='text' name='title' value={title} placeholder='Title' onChange={handleChange} className='writeInput' autoFocus={true}/>
+    console.log(inputs)
+
+return (
+    <div>
+        <form className='editForm' onSubmit={handleSubmit}>
+                    <input type='text' name='image' value={image} placeholder='Image' onChange={handleChange} className='editImage'/>
+                <div className='editFormGroup'>
+                    <input type='text' name='title' value={title} placeholder='Title' onChange={handleChange} className='editInput' autoFocus={true}/>
                 </div>
 
-                <div className='writeFormGroup'>
-                    <textarea placeholder='Tell your story...' type='text' name='content' value={content} onChange={handleChange} className='writeInput writeText'></textarea>
+                <div className='editFormGroup'>
+                    <textarea placeholder='Tell your story...' type='text' name='content' value={content} onChange={handleChange} className='editInput editText'></textarea>
                 </div>
 
-                <div className='chooseCategory'>
+                <div className='editCategory'>
                     <fieldset>
                         <legend>Blog category</legend>
 
@@ -68,8 +71,11 @@ export default function Write(props) {
                         <label htmlFor='Tech'>Tech</label>
                     </fieldset>
                 </div>
-                <button className='writeSubmit'>Publish</button>
+                <div className='edit-btns'>
+                    <button className='edit-submit'>Submit Edit</button>
+                    <button className='close-btn' onClick={() => setEditToggle(prevToggle => !prevToggle)}>Close</button>
+                </div>
             </form>
-        </div>
-)
+    </div>
+    )
 }

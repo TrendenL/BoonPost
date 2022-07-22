@@ -3,20 +3,22 @@ import { useParams } from 'react-router-dom'
 import { UserContext } from '../../context/UserProvider'
 import CommentForm from '../../components/Comment/CommentForm'
 import CommentList from '../../components/Comment/CommentList'
+import moment from 'moment'
 
 import './singlePost.css'
 
 export default function SinglePost(props) {
 
     const {postId} = useParams()
-    console.log(postId)
 
     const { posts, comments, getComments } = useContext(UserContext)
     const thisPost = posts.find(post => post._id === postId)
     
     const mappedComments = comments.map(comment => <CommentList {...comment} key={comment._id} />)
 
-    const { user: {username} } = thisPost
+    const { image, createdAt, user: {username} } = thisPost
+
+    const timeAgo = moment(createdAt).fromNow()
 
     useEffect(() => {
         getComments(thisPost._id)
@@ -26,7 +28,7 @@ export default function SinglePost(props) {
     return (
         <div className='singlePost'>
                 <div className='post-wrapper'>
-                <img className='singlePostImg' src='https://images.unsplash.com/photo-1655439190758-9c45e814d2a3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80' alt='mountains'/>
+                <img className='singlePostImg' src={image} alt='mountains'/>
                     <h1 className='singlePostTitle'>
                         {thisPost.title}
                         <div className='singlePostEdit'>
@@ -37,7 +39,7 @@ export default function SinglePost(props) {
 
                     <div className='singlePostInfo'>
                         <span className='singlePostAuthor'>Author: <b>{username}</b></span>
-                        <span className='singlePostDate'>1 hour ago</span>
+                        <span className='singlePostDate'>created: <b>{timeAgo}</b></span>
                     </div>
                     <p className='singlePostDesc'>{thisPost.content}</p>
                 </div>

@@ -1,14 +1,17 @@
-.singlePost {
-    
+.userPost-container {
+    display: grid;
+    grid-template-columns: 400px repeat(1, 1fr);
+    gap: 50px ;
 }
 
-.post-wrapper {
-    margin: 100px 25px 60px 25px;
+.userPost-wrapper {
+    margin: 20px 25px 60px 25px;
     padding: 20px;
     background: #161D2F;
     border-radius: 15px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    padding: 20px;
+    /* padding: 20px; */
+    width: 100%;
 }
 
 .singlePostImg {
@@ -73,6 +76,11 @@
 .singlePostDesc {
     font-size: 1.25rem;
     line-height: 25px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
 }
 
 .singlePostDesc::first-letter {
@@ -82,12 +90,26 @@
     font-family: 'Permanent Marker', cursive;
 }
 
-.comment {
-    background-color: #161D2F;
-    margin: 0 auto;
-    margin-top: 20px;
-    width: 95%;
-    height: 200px;
-    padding: 10px;
-    border-radius: 10px;
+.post-btns {
+    display: flex;
+    flex: row;
+    justify-content: space-between;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #fff;
 }
+
+.delete-btn {
+    background-color: firebrick;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.edit-btn {
+    background-color: blue;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+}
+

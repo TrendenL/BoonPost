@@ -51,14 +51,14 @@
     transform: scale(1.25);
 }
 
-.profile img {
+.profile-pic img {
     width: 50px;
     height: 50px;
     border-radius: 50%;
     transition: transform 500ms ease;
 }
 
-.profile img:hover {
+.profile-pic img:hover {
     transform: scale(1.25)
 }
 

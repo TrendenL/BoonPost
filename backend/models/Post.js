@@ -12,7 +12,7 @@ const postSchema = new Schema({
     },
     categories: {
         type: String,
-        required: false,
+        required: true,
         enum: ['Music', 'Life', 'Fashion', 'Sports', 'Cinema', 'Tech']
     },
     image: {

@@ -15,7 +15,7 @@ export default function App() {
     const { token, logout, addPost } = useContext(UserContext)
     return (
             <div className='main-container'>
-                <Navbar logout={logout}/>
+                { token && <Navbar logout={logout}/> }
                 <Routes>
                     <Route path='/home' element={<Home />}/>
                     <Route path='/write' element={<Write addPost={addPost} />}/>
@@ -23,7 +23,7 @@ export default function App() {
                     <Route path='/profile' element={<Profile />}/>
                     <Route path='/home/:postId' element={<SinglePost />}/>
                 </Routes>
-                <Sidebar />
+                { token && <Sidebar /> }
             </div>
     )
 }
